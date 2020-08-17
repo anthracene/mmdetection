@@ -103,6 +103,7 @@ def main():
     # build the dataloader
     # TODO: support multiple images per gpu (only minor changes are needed)
     dataset = build_dataset(cfg.data.test)
+    dataset.test_mode = False # Hack to load annotations
     data_loader = build_dataloader(
         dataset,
         samples_per_gpu=1,
@@ -136,7 +137,7 @@ def main():
             broadcast_buffers=False)
         outputs = multi_gpu_test(model, data_loader, args.tmpdir,
                                  args.gpu_collect)
-
+    dataset.test_mode = True
     rank, _ = get_dist_info()
     if rank == 0:
         if args.out:

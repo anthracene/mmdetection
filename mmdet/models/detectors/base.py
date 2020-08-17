@@ -147,6 +147,9 @@ class BaseDetector(nn.Module, metaclass=ABCMeta):
             # proposals.
             if 'proposals' in kwargs:
                 kwargs['proposals'] = kwargs['proposals'][0]
+            kwargs.pop('gt_bboxes',None)
+            kwargs.pop('gt_labels', None)
+
             return self.simple_test(imgs[0], img_metas[0], **kwargs)
         else:
             # TODO: support test augmentation for predefined proposals
