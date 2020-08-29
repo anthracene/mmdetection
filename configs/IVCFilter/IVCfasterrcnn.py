@@ -27,6 +27,6 @@ test = dict(
 )
 )
 
-model=dict(roi_head=dict(bbox_head=dict(num_classes=1)))
+model=dict(roi_head=dict(bbox_head=dict(num_classes=2)))
 
 evaluation = dict(interval=1, metric='mAP')
