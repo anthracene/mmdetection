@@ -20,6 +20,25 @@ except ImportError:
     albumentations = None
     Compose = None
 
+@PIPELINES.register_module()
+class ResizeBBox(object):
+    def __init__(self, scale=1.0):
+        self.scale = scale
+
+    def __call__(self, results):
+        if self.scale == 1.0:
+            return
+        img_shape = results['img_shape']
+        for key in results.get('bbox_fields', []):
+            bboxes = results[key] * self.scale
+            bboxes[:, 0::2] = np.clip(bboxes[:, 0::2], 0, img_shape[1])
+            bboxes[:, 1::2] = np.clip(bboxes[:, 1::2], 0, img_shape[0])
+            results[key] = bboxes
+        return results
+
+    def __repr__(self):
+        return self.__class__.__name__ + f'(scale={self.scale})'
+
 
 @PIPELINES.register_module()
 class Resize(object):

@@ -8,7 +8,7 @@ from .loading import (LoadAnnotations, LoadImageFromFile, LoadImageFromWebcam,
 from .test_time_aug import MultiScaleFlipAug
 from .transforms import (Albu, CutOut, Expand, MinIoURandomCrop, Normalize,
                          Pad, PhotoMetricDistortion, RandomCenterCropPad,
-                         RandomCrop, RandomFlip, Resize, SegRescale)
+                         RandomCrop, RandomFlip, Resize, SegRescale,ResizeBBox)
 
 __all__ = [
     'Compose', 'to_tensor', 'ToTensor', 'ImageToTensor', 'ToDataContainer',
@@ -17,5 +17,5 @@ __all__ = [
     'MultiScaleFlipAug', 'Resize', 'RandomFlip', 'Pad', 'RandomCrop',
     'Normalize', 'SegRescale', 'MinIoURandomCrop', 'Expand',
     'PhotoMetricDistortion', 'Albu', 'InstaBoost', 'RandomCenterCropPad',
-    'AutoAugment', 'CutOut'
+    'AutoAugment', 'CutOut', 'ResizeBBox'
 ]
