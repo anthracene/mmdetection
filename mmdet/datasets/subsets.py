@@ -16,6 +16,8 @@ class SubsetDataset(CustomDataset):
         """Load annotation from annotation file."""
         anns = super().load_annotations(ann_file)
         sub_ann = []
+        if isinstance(self.subset[0],(int,float)):
+            self.subset = [self.subset]
         for lower, upper in self.subset:
             sub_ann.extend(anns[int(lower * len(anns)):int(upper * len(anns))])
         return sub_ann
