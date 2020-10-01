@@ -1,6 +1,4 @@
-_base_ = '../faster_rcnn/faster_rcnn_r50_caffe_fpn_mstrain_1x_coco.py'
-
-#_base_ = '../faster_rcnn/faster_rcnn_r50_fpn_2x_coco.py'
+_base_ = '../faster_rcnn/faster_rcnn_r50_fpn_2x_coco.py'
 
 optimizer = dict(lr=0.02/2)
 
@@ -40,9 +38,9 @@ test = dict(
                 dict(type='RandomFlip'),
                 dict(
                     type='Normalize',
-                    mean=[103.53, 116.28, 123.675],
-                    std=[1.0, 1.0, 1.0],
-                    to_rgb=False),
+                    mean=[123.675, 116.28, 103.53],
+                    std=[58.395, 57.12, 57.375],
+                    to_rgb=True),
                 dict(type='Pad', size_divisor=32),
                 dict(type='ImageToTensor', keys=['img']),
                 dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
