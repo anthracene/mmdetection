@@ -44,10 +44,12 @@ def single_gpu_test(model,
                 img_show = mmcv.imresize(img_show, (ori_w, ori_h))
 
                 if out_dir:
-                    out_file = osp.join(out_dir, img_meta['ori_filename'])
+                    out_file = osp.join(out_dir,
+                                        "{0:0=3d}-".format(i) +
+                                        osp.basename(img_meta['ori_filename']))
                 else:
                     out_file = None
-                if 'gt_boxes' in dataset[i]:
+                if 'gt_bboxes' in dataset[i]:
                     img_show = imshow_det_bboxes(          #call to local hacked version at end of this file
                         img_show,
                         dataset[i]['gt_bboxes'][0]*(ori_w/w), # Rescale ground truth bboxes
