@@ -3,3 +3,4 @@ numpy
 pycocotools@git+https://github.com/open-mmlab/cocoapi.git#subdirectory=pycocotools
 six
 terminaltables
+scikit-learn
