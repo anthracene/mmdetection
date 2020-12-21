@@ -150,6 +150,7 @@ def main():
         # Replace 'ImageToTensor' to 'DefaultFormatBundle'
         cfg.data.test.pipeline = replace_ImageToTensor(cfg.data.test.pipeline)
     dataset = build_dataset(cfg.data.test)
+    dataset.test_mode = False # Hack to load annotations
     data_loader = build_dataloader(
         dataset,
         samples_per_gpu=samples_per_gpu,
@@ -183,7 +184,7 @@ def main():
             broadcast_buffers=False)
         outputs = multi_gpu_test(model, data_loader, args.tmpdir,
                                  args.gpu_collect)
-
+    dataset.test_mode = True
     rank, _ = get_dist_info()
     if rank == 0:
         if args.out:
